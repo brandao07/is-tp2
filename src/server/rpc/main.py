@@ -1,6 +1,7 @@
-import signal, sys
-from xmlrpc.server import SimpleXMLRPCServer
+import signal
+import sys
 from xmlrpc.server import SimpleXMLRPCRequestHandler
+from xmlrpc.server import SimpleXMLRPCServer
 
 from functions.string_length import string_length
 from functions.string_reverse import string_reverse
@@ -11,8 +12,10 @@ if __name__ == "__main__":
     class RequestHandler(SimpleXMLRPCRequestHandler):
         rpc_paths = ('/RPC2',)
 
+
     with SimpleXMLRPCServer(('localhost', PORT), requestHandler=RequestHandler) as server:
         server.register_introspection_functions()
+
 
         def signal_handler(signum, frame):
             print("received signal")
@@ -21,6 +24,7 @@ if __name__ == "__main__":
             # perform clean up, etc. here...
             print("exiting, gracefully")
             sys.exit(0)
+
 
         # signals
         signal.signal(signal.SIGTERM, signal_handler)

@@ -1,11 +1,10 @@
-import csv
 import xml.dom.minidom as md
 import xml.etree.ElementTree as ET
 
-from utils.reader import CSVReader
 from entities.country import Country
-from entities.team import Team
 from entities.player import Player
+from entities.team import Team
+from utils.reader import CSVReader
 
 
 class CSVtoXMLConverter:
@@ -62,4 +61,3 @@ class CSVtoXMLConverter:
         xml_str = ET.tostring(self.to_xml(), encoding='utf8', method='xml').decode()
         dom = md.parseString(xml_str)
         return dom.toprettyxml()
-
