@@ -9,11 +9,11 @@ class Artist(EntityI):
 
     @staticmethod
     def get_one(args):
-        return get_one("select a.id, a.name from artists a where a.name like %s and is_deleted = false", (args[0],))
+        return get_one("select id, name from artists where name like %s and is_deleted = false", (args[0],))
 
     @staticmethod
     def get_all():
-        return get_all("select a.id, a.name from artists a where is_deleted = false limit 25")
+        return get_all("select id, name from artists where is_deleted = false limit 25")
 
     @staticmethod
     def insert(obj):

@@ -9,23 +9,32 @@ class Track(EntityI):
 
     @staticmethod
     def get_all():
-        return get_all("select t.id, t.title, t.url, t.streams, t.artist_id, t.trend_id from tracks t "
-                       "where is_deleted = false limit 25")
+        return get_all("""
+                        select t.id, t.title, t.url, t.streams, t.rank, t.date, t.trend, a.name, r.name
+                        from tracks t
+                            inner join artists a on a.id = t.artists_id
+                            inner join regions r on r.id = t.regions_id
+                        where t.is_deleted = false
+                        limit 25
+                    """)
 
     @staticmethod
     def insert(obj):
-        return insert('insert into tracks (title, url, streams, artist_id, trend_id) '
-                      'values (%s, %s, %s, %s, %s)',
-                      (obj.title, obj.url, obj.streams, obj.artist_id, obj.trend_id))
+        return insert('insert into tracks (title, url, streams, rank,date,trend,artists_id, regions_id) '
+                      'values (%s, %s, %s, %s, %s, %s, %s, %s)',
+                      (obj.title, obj.url, obj.streams, obj.rank, obj.date, obj.trend, obj.artists_id, obj.regions_id))
 
     @staticmethod
     def get_one(args):
         pass
 
-    def __init__(self, id, title, url, streams, artist_id, trend_id):
+    def __init__(self, id, title, url, streams, rank, date, trend, artists_id, regions_id):
         self.id = id
         self.title = title
         self.url = url
         self.streams = streams
-        self.artist_id = artist_id
-        self.trend_id = trend_id
+        self.trend = trend
+        self.date = date
+        self.rank = rank
+        self.artists_id = artists_id
+        self.regions_id = regions_id

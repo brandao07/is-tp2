@@ -1,4 +1,4 @@
-from data.db.db import get_all, insert, delete
+from data.db.db import get_all, insert, delete, get_one
 from data.entities.EntityI import EntityI
 
 
@@ -9,7 +9,7 @@ class Region(EntityI):
 
     @staticmethod
     def get_all():
-        return get_all("select r.id, r.name, r.geom from regions r where is_deleted = false limit 25")
+        return get_all("select id, name, geom from regions where is_deleted = false limit 25")
 
     @staticmethod
     def insert(obj):
@@ -18,7 +18,7 @@ class Region(EntityI):
 
     @staticmethod
     def get_one(args):
-        pass
+        return get_one("select id, name from regions where name like %s and is_deleted = false", (args[0],))
 
     def __init__(self, id, name, geom, lat, lon):
         self.id = id
