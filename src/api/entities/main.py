@@ -31,6 +31,14 @@ def create_artist():
     return "error while creating artist", 500
 
 
+@app.route('/api/artists/<id>', methods=['DELETE'])
+def delete_artist(id):
+    if Artist.delete(id):
+        return "artist deleted successfully!", 201
+
+    return "error while deleting artist", 500
+
+
 @app.route('/api/charts/', methods=['GET'])
 def get_charts():
     return jsonify({"Charts": [Serializable.chart(x) for x in Chart.get_all()]}), 200
@@ -44,6 +52,14 @@ def create_chart():
         return "chart created successfully!", 201
 
     return "error while creating chart", 500
+
+
+@app.route('/api/charts/', methods=['DELETE'])
+def delete_chart(id):
+    if Chart.delete(id):
+        return "chart deleted successfully!", 201
+
+    return "error while deleting chart", 500
 
 
 @app.route('/api/dates/', methods=['GET'])
@@ -63,6 +79,14 @@ def create_date():
     return "error while creating date", 500
 
 
+@app.route('/api/dates/', methods=['DELETE'])
+def delete_date(id):
+    if Date.delete(id):
+        return "date deleted successfully!", 201
+
+    return "error while deleting date", 500
+
+
 @app.route('/api/regions/', methods=['GET'])
 def get_regions():
     return jsonify({"Regions": [Serializable.region(x) for x in Region.get_all()]}), 200
@@ -78,6 +102,14 @@ def create_region():
     return "error while creating region", 500
 
 
+@app.route('/api/regions/', methods=['DELETE'])
+def delete_region(id):
+    if Region.delete(id):
+        return "region deleted successfully!", 201
+
+    return "error while deleting region", 500
+
+
 @app.route('/api/trends/', methods=['GET'])
 def get_trends():
     return jsonify({"Trends": [Serializable.trend(x) for x in Trend.get_all()]}), 200
@@ -91,6 +123,14 @@ def create_trend():
         return "trend created successfully!", 201
 
     return "error while creating trend", 500
+
+
+@app.route('/api/trends/', methods=['DELETE'])
+def delete_trend(id):
+    if Trend.delete(id):
+        return "trend deleted successfully!", 201
+
+    return "error while deleting trend", 500
 
 
 @app.route('/api/tracks/', methods=['GET'])
@@ -111,6 +151,14 @@ def create_tracks():
         return "track created successfully!", 201
 
     return "error while creating track", 500
+
+
+@app.route('/api/tracks/', methods=['DELETE'])
+def delete_track(id):
+    if Track.delete(id):
+        return "track deleted successfully!", 201
+
+    return "error while deleting track", 500
 
 
 if __name__ == '__main__':

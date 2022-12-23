@@ -16,3 +16,8 @@ class EntityI(ABC):
     @abstractmethod
     def get_one(args):
         pass
+
+    @staticmethod
+    @abstractmethod
+    def delete(id):
+        pass

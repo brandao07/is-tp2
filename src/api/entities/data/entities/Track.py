@@ -1,11 +1,16 @@
-from data.db.db import get_all, insert
+from data.db.db import get_all, insert, delete
 from data.entities.EntityI import EntityI
 
 
 class Track(EntityI):
     @staticmethod
+    def delete(id):
+        return delete("update tracks set is_deleted = true where id = %s", (id,))
+
+    @staticmethod
     def get_all():
-        return get_all("select t.id, t.title, t.url, t.streams, t.artist_id, t.trend_id from tracks t limit 25")
+        return get_all("select t.id, t.title, t.url, t.streams, t.artist_id, t.trend_id from tracks t "
+                       "where is_deleted = false limit 25")
 
     @staticmethod
     def insert(obj):

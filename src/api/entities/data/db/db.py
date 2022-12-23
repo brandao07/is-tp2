@@ -93,3 +93,25 @@ def get_one(query, args):
         if connection is not None:
             close_connection(connection)
             cursor.close()
+
+
+def delete(query, args):
+    connection = None
+    cursor = None
+
+    try:
+        connection = open_connection()
+        cursor = connection.cursor()
+
+        cursor.execute(query, args)
+        connection.commit()
+        return True
+
+    except Exception as error:
+        logger(error)
+        return False
+
+    finally:
+        if connection is not None:
+            close_connection(connection)
+            cursor.close()

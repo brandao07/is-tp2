@@ -1,11 +1,15 @@
-from data.db.db import get_all, insert
+from data.db.db import get_all, insert, delete
 from data.entities.EntityI import EntityI
 
 
 class Date(EntityI):
     @staticmethod
+    def delete(id):
+        return delete("update dates set is_deleted = true where id = %s", (id, ))
+
+    @staticmethod
     def get_all():
-        return get_all("select d.id, d.registered_date, d.chart_id from dates d limit 25")
+        return get_all("select d.id, d.registered_date, d.chart_id from dates d where is_deleted = false limit 25")
 
     @staticmethod
     def insert(obj):

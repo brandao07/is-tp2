@@ -1,11 +1,15 @@
-from data.db.db import get_all, insert
+from data.db.db import get_all, insert, delete
 from data.entities.EntityI import EntityI
 
 
 class Region(EntityI):
     @staticmethod
+    def delete(id):
+        return delete("update regions set is_deleted = true where id = %s", (id, ))
+
+    @staticmethod
     def get_all():
-        return get_all("select r.id, r.name, r.geom from regions r limit 25")
+        return get_all("select r.id, r.name, r.geom from regions r where is_deleted = false limit 25")
 
     @staticmethod
     def insert(obj):
