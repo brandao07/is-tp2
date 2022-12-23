@@ -1,4 +1,4 @@
-def log_error(error):
+def logger(msg):
     print("-----------------------------------------")
-    print(error)
+    print(msg)
     print("-----------------------------------------")
