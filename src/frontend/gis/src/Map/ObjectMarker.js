@@ -1,28 +1,30 @@
 import {Avatar, List, ListItem, ListItemIcon, ListItemText} from "@mui/material";
-import FlagIcon from '@mui/icons-material/Flag';
-import PictureInPictureAltIcon from '@mui/icons-material/PictureInPictureAlt';
-import ContactsIcon from '@mui/icons-material/Contacts';
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
+import TrendingUpIcon from '@mui/icons-material/TrendingUp';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import React from "react";
 import {Marker, Popup} from 'react-leaflet';
 import {icon as leafletIcon, point} from "leaflet";
 
 const LIST_PROPERTIES = [
-    {"key": "country", label: "Country", Icon: FlagIcon},
-    {"key": "number", label: "Shirt Number", Icon: ContactsIcon},
-    {"key": "position", label: "Position", Icon: PictureInPictureAltIcon}
+    {"key": "artist", label: "Artist", Icon: AccountCircleIcon},
+    {"key": "date", label: "Date", Icon: CalendarMonthIcon},
+    {"key": "rank", label: "Rank", Icon: EmojiEventsIcon},
+    {"key": "streams", label: "Streams", Icon: TrendingUpIcon},
 ];
 
 export function ObjectMarker({geoJSON}) {
     const properties = geoJSON?.properties
-    const {id, imgUrl, name} = properties;
+    const {id, title} = properties;
     const coordinates = geoJSON?.geometry?.coordinates;
 
     return (
         <Marker
             position={coordinates}
             icon={leafletIcon({
-                iconUrl: imgUrl,
-                iconRetinaUrl: imgUrl,
+                iconUrl: "spotify.png",
+                iconRetinaUrl: "spotify.png",
                 iconSize: point(50, 50),
             })}
         >
@@ -30,9 +32,9 @@ export function ObjectMarker({geoJSON}) {
                 <List dense={true}>
                     <ListItem>
                         <ListItemIcon>
-                            <Avatar alt={name} src={imgUrl}/>
+                            <Avatar alt={title} src={"spotify.png"}/>
                         </ListItemIcon>
-                        <ListItemText primary={name}/>
+                        <ListItemText primary={title}/>
                     </ListItem>
                     {
                         LIST_PROPERTIES
