@@ -2,6 +2,7 @@ import sys
 
 import graphene
 from flask import Flask
+from flask_cors import CORS
 from flask_graphql import GraphQLView
 
 PORT = int(sys.argv[1]) if len(sys.argv) >= 2 else 9000
@@ -18,6 +19,7 @@ schema = graphene.Schema(query=Query)
 
 if __name__ == '__main__':
     app = Flask(__name__)
+    CORS(app)
     app.config["DEBUG"] = True
     app.add_url_rule('/graphql', view_func=GraphQLView.as_view('graphql', schema=schema, graphiql=True))
     app.run(host="0.0.0.0", port=PORT)
