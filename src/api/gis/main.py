@@ -1,10 +1,12 @@
 import sys
 
 from flask import Flask, request
+from flask_cors import CORS
 
 PORT = int(sys.argv[1]) if len(sys.argv) >= 2 else 9000
 
 app = Flask(__name__)
+CORS(app)
 app.config["DEBUG"] = True
 
 
