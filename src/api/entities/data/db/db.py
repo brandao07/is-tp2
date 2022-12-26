@@ -51,28 +51,6 @@ def get_all(query):
             cursor.close()
 
 
-def insert(query, args):
-    connection = None
-    cursor = None
-
-    try:
-        connection = open_connection()
-        cursor = connection.cursor()
-
-        cursor.execute(query, args)
-        connection.commit()
-        return True
-
-    except Exception as error:
-        logger(error)
-        return False
-
-    finally:
-        if connection is not None:
-            close_connection(connection)
-            cursor.close()
-
-
 def get_one(query, args):
     connection = None
     cursor = None
@@ -95,7 +73,7 @@ def get_one(query, args):
             cursor.close()
 
 
-def delete(query, args):
+def execute(query, args):
     connection = None
     cursor = None
 

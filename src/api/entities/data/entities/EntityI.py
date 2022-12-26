@@ -14,10 +14,15 @@ class EntityI(ABC):
 
     @staticmethod
     @abstractmethod
-    def get_one(args):
+    def delete(id):
         pass
 
     @staticmethod
     @abstractmethod
-    def delete(id):
+    def update(obj):
+        pass
+
+    @staticmethod
+    @abstractmethod
+    def get_by_id(id):
         pass
