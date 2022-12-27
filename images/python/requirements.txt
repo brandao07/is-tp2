@@ -7,3 +7,5 @@ flask==2.2.2
 Flask-GraphQL==2.0.1
 graphene
 flask_cors
+requests
+lxml
