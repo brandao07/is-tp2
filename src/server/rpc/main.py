@@ -4,7 +4,10 @@ from xmlrpc.server import SimpleXMLRPCRequestHandler
 from xmlrpc.server import SimpleXMLRPCServer
 
 from functions.string_length import string_length
-from functions.string_reverse import string_reverse
+from functions.find_by_region import find_by_region
+from functions.group_by_date_region import group_by_date_region
+from functions.find_by_artist_region import find_by_artist_region
+from functions.order_by_streams import order_by_streams
 
 PORT = int(sys.argv[1]) if len(sys.argv) >= 2 else 9000
 
@@ -31,9 +34,12 @@ if __name__ == "__main__":
         signal.signal(signal.SIGHUP, signal_handler)
         signal.signal(signal.SIGINT, signal_handler)
 
-        # register both functions
-        server.register_function(string_reverse)
+        # register functions
         server.register_function(string_length)
+        server.register_function(find_by_region)
+        server.register_function(find_by_artist_region)
+        server.register_function(order_by_streams)
+        server.register_function(group_by_date_region)
 
         # start the server
         print(f"Starting the RPC Server in port {PORT}...")
