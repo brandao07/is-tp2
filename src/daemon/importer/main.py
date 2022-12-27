@@ -6,7 +6,9 @@ import uuid
 from watchdog.events import FileSystemEventHandler, FileCreatedEvent
 from watchdog.observers import Observer
 
-from utils.to_xml_converter import CSVtoXMLConverter
+from db import xml_db
+from utils.xml_converter import converter
+from utils.logger import logger
 
 
 def get_csv_files_in_input_folder():
@@ -19,9 +21,7 @@ def generate_unique_file_name(directory):
 
 
 def convert_csv_to_xml(in_path, out_path):
-    converter = CSVtoXMLConverter(in_path)
-    file = open(out_path, "w")
-    file.write(converter.to_xml_str())
+    converter(in_path, out_path)
 
 
 class CSVHandler(FileSystemEventHandler):
@@ -37,25 +37,30 @@ class CSVHandler(FileSystemEventHandler):
 
     async def convert_csv(self, csv_path):
         # here we avoid converting the same file again
-        # !TODO: check converted files in the database
+        # check converted files in the database
         if csv_path in await self.get_converted_files():
             return
 
-        print(f"new file to convert: '{csv_path}'")
+        logger(f"new file to convert: '{csv_path}'")
 
         # we generate a unique file name for the XML file
         xml_path = generate_unique_file_name(self._output_path)
 
         # we do the conversion
-        # !TODO: once the conversion is done, we should updated the converted_documents tables
         convert_csv_to_xml(csv_path, xml_path)
-        print(f"new xml file generated: '{xml_path}'")
+        logger(f"new xml file generated: '{xml_path}'")
 
-        # !TODO: we should store the XML document into the imported_documents table
+        # once the conversion is done, we should update the converted_documents tables
+        if xml_db.transfer_file_converted(csv_path, os.path.getsize(csv_path), xml_path):
+            logger(f"csv imported to the db: {csv_path}")
+
+        # we should store the XML document into the imported_documents table
+        if xml_db.transfer_file_imported(xml_path, xml_path):
+            logger(f"xml imported to the db: {xml_path}")
 
     async def get_converted_files(self):
-        # !TODO: you should retrieve from the database the files that were already converted before
-        return []
+        # you should retrieve from the database the files that were already converted before
+        return xml_db.get_files_converted()
 
     def on_created(self, event):
         if not event.is_directory and event.src_path.endswith(".csv"):
