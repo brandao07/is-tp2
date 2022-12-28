@@ -7,8 +7,7 @@ from flask_cors import CORS
 PORT = int(sys.argv[1]) if len(sys.argv) >= 2 else 9000
 
 print("connecting to server...")
-# FIXME: Connection Refused
-server = xmlrpc.client.ServerProxy("http://0.0.0.0:9000")
+server = xmlrpc.client.ServerProxy("http://rpc-server:9000")
 
 app = Flask(__name__)
 CORS(app)

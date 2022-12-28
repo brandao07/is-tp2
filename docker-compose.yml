@@ -64,6 +64,8 @@ services:
   rpc-server:
     container_name: rpc-server
     build: images/python
+    ports:
+      - "9000:9000"
     volumes:
       - ./src/server/rpc:/usr/src/app
       - ./volumes/shared:/shared
@@ -85,7 +87,7 @@ services:
     environment:
       USE_DEV_MODE: ${USE_DEV_MODE}
       WEB_PORT: ${EXT_PORT_FRONTEND_ENT}
-      API_ENTITIES_URL: "http://localhost:20001/api"
+      API_ENTITIES_URL: "http://localhost:20001"
     depends_on:
       - api-entities
 
@@ -101,7 +103,7 @@ services:
     environment:
       USE_DEV_MODE: ${USE_DEV_MODE}
       WEB_PORT: ${EXT_PORT_FRONTEND_GIS}
-      API_GIS_URL: "api-gis:${API_PORT}"
+      API_GIS_URL: "http://localhost:20002"
     depends_on:
       - api-gis
 
