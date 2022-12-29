@@ -6,7 +6,7 @@ import uuid
 from watchdog.events import FileSystemEventHandler, FileCreatedEvent
 from watchdog.observers import Observer
 
-from db import xml_db
+from data import xml_db
 from utils.xml_converter import converter
 from utils.logger import logger
 
@@ -38,9 +38,13 @@ class CSVHandler(FileSystemEventHandler):
     async def convert_csv(self, csv_path):
         # here we avoid converting the same file again
         # check converted files in the database
-        if csv_path in await self.get_converted_files():
-            return
-
+        converted_files = await self.get_converted_files()
+        for item in converted_files:
+            t = item
+            (csv_file,) = t
+            if csv_path == csv_file:
+                logger(f"file {csv_path} already scanned")
+                return
         logger(f"new file to convert: '{csv_path}'")
 
         # we generate a unique file name for the XML file

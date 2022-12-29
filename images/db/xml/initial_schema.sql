@@ -5,7 +5,8 @@ CREATE TABLE public.imported_documents
     xml        XML                 NOT NULL,
     created_on TIMESTAMP           NOT NULL DEFAULT NOW(),
     updated_on TIMESTAMP           NOT NULL DEFAULT NOW(),
-    is_deleted BOOL                NOT NULL DEFAULT FALSE
+    is_deleted BOOL                NOT NULL DEFAULT FALSE,
+    is_rel     BOOL                NOT NULL DEFAULT FALSE
 );
 
 CREATE TABLE public.converted_documents
