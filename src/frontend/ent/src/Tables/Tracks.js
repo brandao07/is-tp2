@@ -16,7 +16,7 @@ let tracks = []
 
 
 function Tracks() {
-    axios.get(`${process.env.REACT_APP_API_ENTITIES_URL}/api//tracks/`).then((response) => {
+    axios.get(`${process.env.REACT_APP_API_ENTITIES_URL}/api/tracks/`).then((response) => {
         console.log(response.data)
         tracks = response.data["Tracks"]
     }).catch((error) => {

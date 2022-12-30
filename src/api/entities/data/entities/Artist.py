@@ -17,7 +17,7 @@ class Artist(EntityI):
 
     @staticmethod
     def get_all():
-        return get_all("select id, name from artists where is_deleted = false limit 25")
+        return get_all("select id, name from artists where is_deleted = false")
 
     @staticmethod
     def insert(obj):

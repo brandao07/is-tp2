@@ -39,7 +39,6 @@ class Track(EntityI):
                             inner join artists a on a.id = t.artists_id
                             inner join regions r on r.id = t.regions_id
                         where t.is_deleted = false
-                        limit 25
                     """)
 
     @staticmethod

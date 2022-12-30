@@ -16,7 +16,7 @@ let regions = []
 
 
 function Regions() {
-    axios.get(`${process.env.REACT_APP_API_ENTITIES_URL}/api//regions/`).then((response) => {
+    axios.get(`${process.env.REACT_APP_API_ENTITIES_URL}/api/regions/`).then((response) => {
         console.log(response.data)
         regions = response.data["Regions"]
     }).catch((error) => {

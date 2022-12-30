@@ -28,13 +28,16 @@ create table if not exists public.artists
     id         uuid    default uuid_generate_v4() not null
         constraint artists_pk
             primary key,
-    name       varchar                            not null,
+    name       varchar                            not null
+        constraint artists_pk2
+            unique,
     created_at date    default now()              not null,
     is_deleted boolean default false              not null
 );
 
 alter table public.artists
     owner to is;
+
 
 create table if not exists public.tracks
 (
