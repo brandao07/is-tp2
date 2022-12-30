@@ -1,0 +1,38 @@
+<spotify>
+    <regions>
+        <region name="Argentina" lat="-34.9964963" lon="-64.9672817">
+            <artists>
+                <artist name="Shakira">
+                    <tracks>
+                        <track date="2017-01-01">
+                            <url>https://open.spotify.com/track/6mICuAdrwEjh6Y6lroV2Kg</url>
+                            <title>Chantaje (feat. Maluma)</title>
+                            <streams>253019</streams>
+                            <rank>1</rank>
+                            <trend>SAME_POSITION</trend>
+                        </track>
+                    </tracks>
+                </artist>
+                <artist name="Rombai">
+                    <tracks>
+                        <track date="2017-01-01">
+                            <url>https://open.spotify.com/track/1MpKZi1zTXpERKwxmOu1PH</url>
+                            <title>Cuando Se Pone a Bailar</title>
+                            <streams>148369</streams>
+                            <rank>7</rank>
+                            <trend>MOVE_DOWN</trend>
+                        </track>
+                        <track date="2017-01-01">
+                            <url>https://open.spotify.com/track/5jMvnSyOgGY8JpvHqeyVOg</url>
+                            <title>Locuras contigo</title>
+                            <streams>43260</streams>
+                            <rank>56</rank>
+                            <trend>MOVE_UP</trend>
+                        </track>
+                    </tracks>
+                </artist>
+            </artists>
+        </region>
+    </regions>
+</spotify>
+          
