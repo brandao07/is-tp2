@@ -36,11 +36,13 @@ def get_all():
     try:
         connection = open_connection()
         cursor = connection.cursor()
+        # TODO: mostrar ao prof
         query = """
-            select t.id, t.title, t.date, t.streams, t.rank, t.url, t.trend, r.name, a.name, ST_X(geom), ST_Y(geom)
+            select distinct t.id, t.title, t.date, t.streams, t.rank, t.url, t.trend, r.name, a.name, ST_X(geom), ST_Y(geom)
             from tracks t
                 inner join regions r on r.id = t.regions_id
                 inner join artists a on a.id = t.artists_id
+            where t.rank = 1 and t.date = '2017-01-01'
             """
         cursor.execute(query)
         connection.commit()
