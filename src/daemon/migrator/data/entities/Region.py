@@ -26,7 +26,6 @@ class Region(EntityI):
         url = 'http://api-entities:8080/api/regions/'
         data = Serializable.region(obj)
         headers = {'Content-Type': 'application/json'}
-        print(data)
         requests.post(url, data=json.dumps(data), headers=headers)
 
         return
