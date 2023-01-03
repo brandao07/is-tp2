@@ -13,6 +13,7 @@ CORS(app)
 app.config["DEBUG"] = True
 
 
+# TODO PASSAR BOUNDS COMO PARAMETRO DA QUERY
 @app.route('/api/markers/', methods=['GET'])
 def get_markers():
     return jsonify({"Markers": [Serializable.marker(x) for x in db.get_all()]}), 200

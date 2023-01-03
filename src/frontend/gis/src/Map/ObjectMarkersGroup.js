@@ -6,6 +6,7 @@ import axios from "axios";
 let markers = []
 
 function ObjectMarkersGroup() {
+    // TODO: PASSAR BOUNDS POR PARAMETRO PARA DEPOIS FAZER A QUERY
     axios.get(`${process.env.REACT_APP_API_GIS_URL}/api/markers/`).then((response) => {
         console.log(response.data)
         markers = response.data["Markers"]

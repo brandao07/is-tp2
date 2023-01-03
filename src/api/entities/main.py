@@ -14,6 +14,7 @@ app = Flask(__name__)
 CORS(app)
 app.config["DEBUG"] = True
 
+# TODO O DAEMON GIS É QUE ADICIONA AS COORDENADAS
 
 @app.route('/api/artists/', methods=['GET'])
 def get_artists():

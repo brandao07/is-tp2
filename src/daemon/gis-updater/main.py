@@ -8,7 +8,7 @@ if __name__ == "__main__":
 
     while True:
         print(f"Getting up to {ENTITIES_PER_ITERATION} entities without coordinates...")
-        # !TODO: 1- Use api-gis to retrieve a fixed amount of entities without coordinates (e.g. 100 entities per iteration, use ENTITIES_PER_ITERATION)
-        # !TODO: 2- Use the entity information to retrieve coordinates from an external API
-        # !TODO: 3- Submit the changes
+        # TODO: Fazer um GET a entities API a procura dos paises sem coordenadas
+        # TODO: Apos o GET adicionar coordenadas com o API que estamos a usar no importer
+        # TODO: Apos inserir as coordenadas mandar de volta para o entities API que vai adicionar na bd
         time.sleep(POLLING_FREQ)

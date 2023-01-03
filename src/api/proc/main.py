@@ -13,6 +13,7 @@ app = Flask(__name__)
 CORS(app)
 app.config["DEBUG"] = True
 
+# TODO ADICIONAR ENDPOINTS (4)
 
 @app.route('/api/test/', methods=['GET'])
 def test():

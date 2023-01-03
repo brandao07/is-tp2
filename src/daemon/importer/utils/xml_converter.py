@@ -12,6 +12,7 @@ def converter(src: str, out: str):
     regions_el = SubElement(root, 'regions')
 
     for idx, (region, values) in enumerate(data.items()):
+        # TODO: APAGAR ISTO QUANDO O GIS-UPDATER TIVER FEITO
         coords = generate_coords(region)
         region_el = SubElement(regions_el, 'region', {
             'name': region,
@@ -80,6 +81,7 @@ def format_data(src):
         return data
 
 
+# TODO: APAGAR ISTO QUANDO O GIS-UPDATER TIVER FEITO
 # GENERATE REGION COORDS FROM API
 def generate_coords(region: str):
     url = "https://nominatim.openstreetmap.org/"
