@@ -36,7 +36,6 @@ def get_all():
     try:
         connection = open_connection()
         cursor = connection.cursor()
-        # TODO: mostrar ao prof
         query = """
             select distinct t.id, t.title, t.date, t.streams, t.rank, t.url, t.trend, r.name, a.name, ST_X(geom), ST_Y(geom)
             from tracks t

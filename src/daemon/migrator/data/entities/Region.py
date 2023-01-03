@@ -8,8 +8,10 @@ import requests
 
 class Region(EntityI):
 
+
     @staticmethod
     def get_all(id):
+        # TODO: APAGAR LAT LON QUANDO O GIS-UPDATER TIVER FEITO
         query = """
         select 
         unnest(xpath('//region/@name', xml)),
