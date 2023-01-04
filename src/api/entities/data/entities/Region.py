@@ -16,6 +16,7 @@ class Region(EntityI):
             obj.geom = old[2]
         return execute('update regions set name = %s, geom = %s where id = %s', (obj.name, obj.geom, obj.id))
 
+
     @staticmethod
     def delete(id):
         return execute("update regions set is_deleted = true where id = %s", (id,))
@@ -23,6 +24,15 @@ class Region(EntityI):
     @staticmethod
     def get_all():
         return get_all("select id, name, geom from regions where is_deleted = false")
+
+    @staticmethod
+    def get_pending():
+        return get_all("select name from regions where geom is null and is_deleted = false")
+
+    @staticmethod
+    def add_coords(obj):
+        return execute('update regions set geom = ST_SetSRID(ST_MakePoint(%s, %s),4326) where name like %s',
+                       (float(obj.lat), float(obj.lon), obj.name))
 
     @staticmethod
     def insert(obj):

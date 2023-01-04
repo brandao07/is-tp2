@@ -14,6 +14,7 @@ app = Flask(__name__)
 CORS(app)
 app.config["DEBUG"] = True
 
+
 # TODO O DAEMON GIS É QUE ADICIONA AS COORDENADAS
 
 @app.route('/api/artists/', methods=['GET'])
@@ -61,6 +62,19 @@ def create_region():
         return "region created successfully!", 201
 
     return "error while creating region", 500
+
+
+@app.route('/api/regions/pending/', methods=['GET'])
+def show_pending():
+    return jsonify({"Regions": [Serializable.pending_region(x) for x in Region.get_pending()]}), 200
+
+
+@app.route('/api/regions/pending/', methods=['POST'])
+def add_coords():
+    data = request.get_json()
+    if Region.add_coords(Region(name=data['name'], id=None, lat=data['lat'], lon=data['lon'], geom=None)):
+        return "coords added successfully!", 201
+    return "error while adding coords", 500
 
 
 @app.route('/api/regions/<id>', methods=['DELETE'])

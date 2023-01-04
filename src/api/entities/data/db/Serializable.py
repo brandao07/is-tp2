@@ -28,3 +28,9 @@ class Serializable:
             "artist": row[7],
             "region": row[8]
         }
+
+    @staticmethod
+    def pending_region(row):
+        return {
+            "name": row[0]
+        }
