@@ -15,8 +15,6 @@ CORS(app)
 app.config["DEBUG"] = True
 
 
-# TODO O DAEMON GIS É QUE ADICIONA AS COORDENADAS
-
 @app.route('/api/artists/', methods=['GET'])
 def get_artists():
     return jsonify({"Artists": [Serializable.artist(x) for x in Artist.get_all()]}), 200
@@ -58,7 +56,7 @@ def get_regions():
 def create_region():
     data = request.get_json()
 
-    if Region.insert(Region(name=data['name'], id=None, lat=data['lat'], lon=data['lon'], geom=None)):
+    if Region.insert(Region(name=data['name'], id=None, geom=None, lat=None, lon=None)):
         return "region created successfully!", 201
 
     return "error while creating region", 500

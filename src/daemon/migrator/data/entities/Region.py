@@ -11,12 +11,9 @@ class Region(EntityI):
 
     @staticmethod
     def get_all(id):
-        # TODO: APAGAR LAT LON QUANDO O GIS-UPDATER TIVER FEITO
         query = """
         select 
-        unnest(xpath('//region/@name', xml)),
-        unnest(xpath('//region/@lat', xml)),
-        unnest(xpath('//region/@lon', xml))
+        unnest(xpath('//region/@name', xml))
         from imported_documents
         where id = %s and is_deleted = false and is_rel = false
         """

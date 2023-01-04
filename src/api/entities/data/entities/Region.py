@@ -36,8 +36,8 @@ class Region(EntityI):
 
     @staticmethod
     def insert(obj):
-        return execute('insert into regions (name, geom) values (%s, ST_SetSRID(ST_MakePoint(%s, %s),4326))',
-                       (obj.name, float(obj.lat), float(obj.lon)))
+        return execute('insert into regions (name) values (%s)',
+                       (obj.name,))
 
     @staticmethod
     def get_one_by_name(name):
