@@ -8,11 +8,8 @@ class Serializable:
 
     @staticmethod
     def region(row):
-        # TODO: APAGAR LAT LON QUANDO O GIS-UPDATER TIVER FEITO
         return {
-            "name": row[0],
-            "lat": row[1],
-            "lon": row[2]
+            "name": row[0]
         }
 
     @staticmethod
