@@ -20,28 +20,26 @@ app.config["DEBUG"] = True
 def find_region():
     args = request.args
     data = server.find_by_region(args.get("region_name"))
-    return jsonify({"Tracks": [Serializable.find_by_region(x) for x in data]}), 200
+    return jsonify({"Info": [Serializable.find_by_region(x) for x in data]}), 200
 
 
 @app.route("/api/regions/artists", method=['GET'])
 def find_region_artist():
     args = request.args
     data = server.find_by_artist_region(args.get("region_name"), args.get("artist_name"))
-    return jsonify({"Tracks": [Serializable.find_by_region(x) for x in data]}), 200
+    return jsonify({"Info": [Serializable.find_by_region(x) for x in data]}), 200
 
 
 @app.route("/api/streams", method=['GET'])
 def order_streams():
     data = server.order_by_streams()
-    # TODO: Serialize data
-    return data
+    return jsonify({"Info": [Serializable.artist_streams(x) for x in data]}), 200
 
 
-@app.route("/api/dates/artists", methods=['GET'])
+@app.route("/api/tracks/artists", methods=['GET'])
 def group_date_artist():
-    data = server.group_by_date_artist()
-    # TODO: Serialize data
-    return data
+    data = server.group_by_track_artist()
+    return jsonify({"Info": [Serializable.artist_tracks(x) for x in data]}), 200
 
 
 if __name__ == '__main__':

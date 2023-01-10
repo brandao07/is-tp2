@@ -1,7 +1,7 @@
 from db import db
 
 
-def group_by_date_artist():
+def group_by_track_artist():
     query = """
     select
     artist_name,
