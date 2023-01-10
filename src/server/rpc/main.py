@@ -36,10 +36,10 @@ if __name__ == "__main__":
 
         # register functions
         server.register_function(string_length)
-        server.register_function(find_by_region)  # TODO MELHORAR QUERY
+        server.register_function(find_by_region)
         server.register_function(find_by_artist_region)  # TODO MELHORAR QUERY
-        server.register_function(order_by_streams)
-        server.register_function(group_by_date_artist)
+        server.register_function(order_by_streams) # TODO NAO FUNFA
+        server.register_function(group_by_date_artist) # TODO NAO FUNFA
 
         # start the server
         print(f"Starting the RPC Server in port {PORT}...")
