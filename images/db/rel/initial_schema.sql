@@ -13,7 +13,7 @@ create table if not exists public.regions
     name       varchar                            not null
         constraint regions_pk2
             unique,
-    geom       geometry                           not null
+    geom       geometry
         constraint regions_pk3
             unique,
     created_at date    default now()              not null,
