@@ -16,13 +16,16 @@ app.config["DEBUG"] = True
 @app.route('/api/markers', methods=['GET'])
 def get_markers():
     args = request.args
-    ne_lat = args.get("ne_lat")
-    ne_lon = args.get("ne_lon")
-    sw_lat = args.get("sw_lat")
-    sw_lon = args.get("sw_lon")
+    ne_lat = float(args.get("ne_lat"))
+    ne_lon = float(args.get("ne_lon"))
+    sw_lat = float(args.get("sw_lat"))
+    sw_lon = float(args.get("sw_lon"))
 
     # TODO: Falta verificar se esta entre as coordenadas acima
-    return jsonify({"Markers": [Serializable.marker(x) for x in db.get_all()]}), 200
+    if db.get_all(ne_lat, ne_lon, sw_lat, sw_lon) is not None:
+        return jsonify({"Markers": [Serializable.marker(x) for x in db.get_all(ne_lat, ne_lon, sw_lat, sw_lon)]}), 200
+
+    return jsonify({"Markers": []}), 418
 
 
 if __name__ == '__main__':

@@ -8,6 +8,7 @@ from Serializable import Serializable
 POLLING_FREQ = int(sys.argv[1]) if len(sys.argv) >= 2 else 60
 ENTITIES_PER_ITERATION = int(sys.argv[2]) if len(sys.argv) >= 3 else 10
 
+
 # TODO: Use ENTITIES_PER_ITERATION
 def generate_coords(region: str):
     url = "https://nominatim.openstreetmap.org/"

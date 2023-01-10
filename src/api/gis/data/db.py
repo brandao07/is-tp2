@@ -29,21 +29,22 @@ def close_connection(conn):
         return True
 
 
-def get_all():
+def get_all(ne_lat, ne_lon, sw_lat, sw_lon):
     connection = None
     cursor = None
 
     try:
         connection = open_connection()
         cursor = connection.cursor()
+        #FIXME: NAO FUNFA
         query = """
-            select distinct t.id, t.title, t.date, t.streams, t.rank, t.url, t.trend, r.name, a.name, ST_X(geom), ST_Y(geom)
+            select distinct t.id, t.title, t.date, t.streams, t.rank, t.url, t.trend, r.name, a.name, ST_X(r.geom), ST_Y(r.geom)
             from tracks t
                 inner join regions r on r.id = t.regions_id
                 inner join artists a on a.id = t.artists_id
-            where t.rank = 1 and t.date = '2017-01-01'
+            where t.rank = 1 and t.date = '2017-01-01' and st_within(r.geom, st_makeenvelope(%s, %s, %s, %s, 4362))
             """
-        cursor.execute(query)
+        cursor.execute(query, (ne_lat, ne_lon, sw_lat, sw_lon))
         connection.commit()
         return cursor.fetchall()
 
