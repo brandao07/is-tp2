@@ -23,14 +23,14 @@ def find_region():
     return jsonify({"Info": [Serializable.find_by_region(x) for x in data]}), 200
 
 
-@app.route("/api/regions/artists", method=['GET'])
+@app.route("/api/regions/artists", methods=['GET'])
 def find_region_artist():
     args = request.args
     data = server.find_by_artist_region(args.get("region_name"), args.get("artist_name"))
     return jsonify({"Info": [Serializable.find_by_region(x) for x in data]}), 200
 
 
-@app.route("/api/streams", method=['GET'])
+@app.route("/api/streams", methods=['GET'])
 def order_streams():
     data = server.order_by_streams()
     return jsonify({"Info": [Serializable.artist_streams(x) for x in data]}), 200

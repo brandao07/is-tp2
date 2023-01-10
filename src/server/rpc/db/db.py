@@ -29,6 +29,28 @@ def close_connection(conn):
         return True
 
 
+def get_all_with_args(query, args):
+    connection = None
+    cursor = None
+
+    try:
+        connection = open_connection()
+        cursor = connection.cursor()
+
+        cursor.execute(query, args)
+        connection.commit()
+        return cursor.fetchall()
+
+    except Exception as error:
+        logger(error)
+        return None
+
+    finally:
+        if connection is not None:
+            close_connection(connection)
+            cursor.close()
+
+
 def get_all(query):
     connection = None
     cursor = None

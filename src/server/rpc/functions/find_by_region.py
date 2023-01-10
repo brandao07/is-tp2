@@ -1,6 +1,7 @@
 from db import db
 
-def find_by_region(region):
+
+def find_by_region(region: str):
     query = """
         select
             unnest(xpath('/track/title/text()', tracks_xml)) as title,
@@ -16,11 +17,11 @@ def find_by_region(region):
              unnest(xpath('/artist/tracks/track', artist_xml)) tracks_xml
         from (select xpath('/region/@name', region_xml)                  region_name,
                    unnest(xpath('/region/artists/artist', region_xml)) artist_xml
-            from (select unnest(xpath('/spotify/regions/region[@name='{region}']', xml)) region_xml
-                  from imported_documents where is_deleted = false")
+            from (select unnest(xpath('/spotify/regions/region[@name='%s']', xml)) region_xml
+                  from imported_documents where is_deleted = false)
                 t1)
           t2)
         t3
     """
 
-    return db.get_all(query)
+    return db.get_all_with_args(query, (region,))

@@ -3,7 +3,6 @@ import sys
 from xmlrpc.server import SimpleXMLRPCRequestHandler
 from xmlrpc.server import SimpleXMLRPCServer
 
-from functions.string_length import string_length
 from functions.find_by_region import find_by_region
 from functions.group_by_track_artist import group_by_track_artist
 from functions.find_by_artist_region import find_by_artist_region
@@ -35,11 +34,10 @@ if __name__ == "__main__":
         signal.signal(signal.SIGINT, signal_handler)
 
         # register functions
-        server.register_function(string_length)
         server.register_function(find_by_region)
-        server.register_function(find_by_artist_region)  # TODO MELHORAR QUERY
-        server.register_function(order_by_streams) # TODO NAO FUNFA
-        server.register_function(group_by_track_artist) # TODO NAO FUNFA
+        server.register_function(find_by_artist_region)
+        server.register_function(order_by_streams)
+        server.register_function(group_by_track_artist)
 
         # start the server
         print(f"Starting the RPC Server in port {PORT}...")
