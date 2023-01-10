@@ -35,7 +35,6 @@ if __name__ == "__main__":
 
         r = requests.get("http://api-entities:8080/api/regions/pending/")
         data = r.json()
-        # PODE NAO FUNCIONAR
         regions = data["Regions"]
         for x in regions:
             coords = generate_coords(x["name"])

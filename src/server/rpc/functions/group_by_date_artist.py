@@ -1,7 +1,7 @@
 from db import db
 
 
-def group_by_date_region():
+def group_by_date_artist():
     query = """
     select
     artist_name,

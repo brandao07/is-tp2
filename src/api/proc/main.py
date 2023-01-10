@@ -1,7 +1,7 @@
 import sys
 import xmlrpc.client
 
-from flask import Flask
+from flask import Flask, request
 from flask_cors import CORS
 
 PORT = int(sys.argv[1]) if len(sys.argv) >= 2 else 9000
@@ -13,17 +13,34 @@ app = Flask(__name__)
 CORS(app)
 app.config["DEBUG"] = True
 
-# TODO ADICIONAR ENDPOINTS (4)
+@app.route("/api/regions", methods=['GET'])
+def find_region():
+    args = request.args
+    data = server.find_by_region(args.get("region_name"))
+    # TODO: Serialize data
+    return data
 
-@app.route('/api/test/', methods=['GET'])
-def test():
-    print(server.string_length("Hello"))
-    return "Hello", 200
+
+@app.route("/api/regions/artists", method=['GET'])
+def find_region_artist():
+    args = request.args
+    data = server.find_by_artist_region(args.get("region_name"), args.get("artist_name"))
+    # TODO: Serialize data
+    return data
 
 
-@app.route('/api/hello/', methods=['GET'])
-def hello_world():
-    return "Hello World", 200
+@app.route("/api/streams", method=['GET'])
+def order_streams():
+    data = server.order_by_streams()
+    # TODO: Serialize data
+    return data
+
+
+@app.route("/api/dates/artists", methods=['GET'])
+def group_date_artist():
+    data = server.group_by_date_artist()
+    # TODO: Serialize data
+    return data
 
 
 if __name__ == '__main__':
