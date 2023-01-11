@@ -12,41 +12,38 @@ import {
 } from "@mui/material";
 import axios from "axios";
 
+let info = []
 
-
-let artists = []
-
-
-function Artists() {
-    axios.get(`${process.env.REACT_APP_API_ENTITIES_URL}/api/artists/`).then((response) => {
+function TracksCount() {
+    axios.get(`${process.env.REACT_APP_API_PROC_URL}/api/tracks/artists`).then((response) => {
         console.log(response.data)
-        artists = response.data["Artists"]
+        info = response.data["Info"]
     }).catch((error) => {
         console.log(error)
     })
     const PAGE_SIZE = 10;
     const [page, setPage] = useState(1);
     const [data, setData] = useState(null);
-    const [maxDataSize, setMaxDataSize] = useState(artists.length);
+    const [maxDataSize, setMaxDataSize] = useState(info.length);
 
     useEffect(() => {
         setData(null);
         setTimeout(() => {
             console.log(`fetching from ${URL}`)
-            setData(artists.filter((item, index) => Math.floor(index / PAGE_SIZE) === (page - 1)));
+            setData(info.filter((item, index) => Math.floor(index / PAGE_SIZE) === (page - 1)));
         }, 500);
     }, [page])
 
     return (
         <>
-            <h1>Artists</h1>
+            <h1>Tracks Count By Artists</h1>
 
             <TableContainer component={Paper}>
                 <Table sx={{minWidth: 650}} aria-label="simple table">
                     <TableHead>
                         <TableRow>
-                            <TableCell component="th" align="center">ID</TableCell>
-                            <TableCell>Artist Name</TableCell>
+                            <TableCell component="th" align="center">Artist</TableCell>
+                            <TableCell>Tracks</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -54,12 +51,12 @@ function Artists() {
                             data ?
                                 data.map((row) => (
                                     <TableRow
-                                        key={row.id}
+                                        key={row.artist_name}
                                         style={{background: "gray", color: "black"}}
                                     >
-                                        <TableCell component="td" align="center">{row.id}</TableCell>
+                                        <TableCell component="td" align="center">{row.artist_name}</TableCell>
                                         <TableCell component="td" scope="row">
-                                            {row.name}
+                                            {row.tracks}
                                         </TableCell>
                                     </TableRow>
                                 ))
@@ -90,4 +87,4 @@ function Artists() {
     );
 }
 
-export default Artists;
+export default TracksCount;

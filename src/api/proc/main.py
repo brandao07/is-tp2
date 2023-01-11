@@ -20,14 +20,14 @@ app.config["DEBUG"] = True
 def find_region():
     args = request.args
     data = server.find_by_region(args.get("region_name"))
-    return jsonify({"Info": [Serializable.find_by_region(x) for x in data]}), 200
+    return jsonify({"Info": [Serializable.find_by_region(x, idx) for idx, x in enumerate(data)]}), 200
 
 
 @app.route("/api/regions/artists", methods=['GET'])
 def find_region_artist():
     args = request.args
     data = server.find_by_artist_region(args.get("region_name"), args.get("artist_name"))
-    return jsonify({"Info": [Serializable.find_by_region(x) for x in data]}), 200
+    return jsonify({"Info": [Serializable.find_by_region_artist(x, idx) for idx, x in enumerate(data)]}), 200
 
 
 @app.route("/api/streams", methods=['GET'])

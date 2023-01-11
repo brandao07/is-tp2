@@ -75,5 +75,3 @@ def format_data(src):
             })
 
         return data
-
-

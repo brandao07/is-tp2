@@ -1,17 +1,34 @@
-import TopTeams from "../Procedures/TopTeams";
+import Regions from "../Procedures/Regions";
+import TracksCount from "../Procedures/TracksCount";
+import ArtistsStreams from "../Procedures/ArtistsStreams";
+import ArtistRegion from "../Procedures/ArtistRegion";
+
+
 
 const Sections = [
 
     {
-        id: "top-teams",
-        label: "Top Teams",
-        content: <TopTeams/>
+        id: "find_by_regions",
+        label: "Find by Regions",
+        content: <Regions/>
     },
 
     {
-        id: "top-scorers",
-        label: "Top Scorers",
-        content: <h1>Top Scorers - Work in progresss</h1>
+        id: "tracks_count",
+        label: "Tracks Count",
+        content: <TracksCount/>
+    },
+
+    {
+        id: "artists_streams",
+        label: "Artists Streams",
+        content: <ArtistsStreams/>
+    },
+
+    {
+        id: "artists_region",
+        label: "Track by Artists and Region",
+        content: <ArtistRegion/>
     }
 
 ];
