@@ -21,7 +21,6 @@ def get_markers():
     sw_lat = float(args.get("sw_lat"))
     sw_lon = float(args.get("sw_lon"))
 
-    # TODO: Falta verificar se esta entre as coordenadas acima
     if db.get_all(ne_lat, ne_lon, sw_lat, sw_lon) is not None:
         return jsonify({"Markers": [Serializable.marker(x) for x in db.get_all(ne_lat, ne_lon, sw_lat, sw_lon)]}), 200
 

@@ -62,12 +62,14 @@ def create_region():
     return "error while creating region", 500
 
 
-@app.route('/api/regions/pending/', methods=['GET'])
+@app.route('/api/regions/pending', methods=['GET'])
 def show_pending():
-    return jsonify({"Regions": [Serializable.pending_region(x) for x in Region.get_pending()]}), 200
+    args = request.args
+    amount = int(args.get("amount"))
+    return jsonify({"Regions": [Serializable.pending_region(x) for x in Region.get_pending(amount)]}), 200
 
 
-@app.route('/api/regions/pending/', methods=['POST'])
+@app.route('/api/regions/pending', methods=['POST'])
 def add_coords():
     data = request.get_json()
     if Region.add_coords(Region(name=data['name'], id=None, lat=data['lat'], lon=data['lon'], geom=None)):

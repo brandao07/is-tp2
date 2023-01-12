@@ -26,8 +26,8 @@ class Region(EntityI):
         return get_all("select id, name, geom from regions where is_deleted = false")
 
     @staticmethod
-    def get_pending():
-        return get_all("select name from regions where geom is null and is_deleted = false")
+    def get_pending(amount):
+        return get_all(f"select name from regions where geom is null and is_deleted = false limit {amount}")
 
     @staticmethod
     def add_coords(obj):

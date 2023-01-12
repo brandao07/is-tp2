@@ -34,12 +34,12 @@ if __name__ == "__main__":
     while True:
         print(f"Getting up to {ENTITIES_PER_ITERATION} entities without coordinates...")
 
-        r = requests.get("http://api-entities:8080/api/regions/pending/")
+        r = requests.get(f"http://api-entities:8080/api/regions/pending?amount={ENTITIES_PER_ITERATION}")
         data = r.json()
         regions = data["Regions"]
         for x in regions:
             coords = generate_coords(x["name"])
-            url = 'http://api-entities:8080/api/regions/pending/'
+            url = 'http://api-entities:8080/api/regions/pending'
             obj = (x["name"], coords[0], coords[1])
             data = Serializable.region(obj)
             headers = {'Content-Type': 'application/json'}
