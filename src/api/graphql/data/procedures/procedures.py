@@ -35,25 +35,25 @@ class Procedures:
     @staticmethod
     def artist_streams():
         query = """
-            select a.name, sum(t.streams::int) from tracks t
+            select a.name, sum(t.streams::int)
+            from tracks t
                 inner join artists a on a.id = t.artists_id
+            where not t.is_deleted
+                and not a.is_deleted
             group by a.name
             order by sum(t.streams::int) desc
-            where not t.is_deleted
-            and not r.is_deleted
-            and not a.is_deleted
           """
         return db.get_all(query, ())
 
     @staticmethod
     def artist_tracks():
         query = """
-            select a.name, count(*) from tracks t
+            select a.name, count(*)
+            from tracks t
                 inner join artists a on a.id = t.artists_id
-            group by a.name
-            order by count(*) desc
             where not t.is_deleted
-            and not r.is_deleted
-            and not a.is_deleted
+                and not a.is_deleted
+            group by a.name
+            order by sum(t.streams::int) desc
             """
         return db.get_all(query, ())
