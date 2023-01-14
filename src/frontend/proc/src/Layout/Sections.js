@@ -4,7 +4,6 @@ import ArtistsStreams from "../Procedures/ArtistsStreams";
 import ArtistRegion from "../Procedures/ArtistRegion";
 
 
-
 const Sections = [
 
     {

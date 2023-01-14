@@ -54,6 +54,6 @@ class Procedures:
             where not t.is_deleted
                 and not a.is_deleted
             group by a.name
-            order by sum(t.streams::int) desc
+            order by count(t.streams::int) desc
             """
         return db.get_all(query, ())
