@@ -105,10 +105,10 @@ function ArtistRegion() {
                                         style={{background: "gray", color: "black"}}
                                     >
                                         <TableCell component="td" align="center">{row.id}</TableCell>
-                                        <TableCell align="center">{row.artistName}</TableCell>
+                                        <TableCell align="center">{row.artist_name}</TableCell>
                                         <TableCell align="center">{row.date}</TableCell>
                                         <TableCell align="center">{row.rank}</TableCell>
-                                        <TableCell align="center">{row.regionName}</TableCell>
+                                        <TableCell align="center">{row.region_name}</TableCell>
                                         <TableCell align="center">{row.streams}</TableCell>
                                         <TableCell align="center">{row.title}</TableCell>
                                         <TableCell align="center">{row.trend}</TableCell>
