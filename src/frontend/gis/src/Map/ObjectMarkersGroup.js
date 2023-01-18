@@ -25,12 +25,12 @@ function ObjectMarkersGroup() {
         console.log(`> getting data for bounds`, bounds);
         axios.get(`${process.env.REACT_APP_API_GIS_URL}/api/markers?ne_lat=${bounds._northEast.lat}&ne_lon=${bounds._northEast.lng}&sw_lat=${bounds._southWest.lat}&sw_lon=${bounds._southWest.lng}`)
             .then((response) => {
-            console.log(response.data)
-            markers = response.data["Markers"]
-        }).catch((error) => {
+                console.log(response.data)
+                markers = response.data["Markers"]
+                setGeom(markers)
+            }).catch((error) => {
             console.log(error)
         })
-        setGeom(markers);
     }, [bounds])
 
     return (
